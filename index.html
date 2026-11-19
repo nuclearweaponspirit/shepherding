@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shepherding</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F3A2B'/%3E%3Cpath d='M28 58V24C28 10 46 10 46 22' fill='none' stroke='%23F6F1E4' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M12 54L50 18' stroke='%23C8963E' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='51' cy='17' r='5' fill='%23C8963E'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F6F1E4;--card:#FFFDF7;--ink:#1B1F1A;--mute:#4A5045;--line:#DCD2B8;--green:#1F3A2B;--gold:#C8963E;--sage:#9DBB8F;--onGreen:#F6F1E4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141A15;--card:#1D251E;--ink:#F1ECDD;--mute:#B9BFAF;--line:#33402F;--green:#9DBB8F;--gold:#D9A94F;--sage:#4E7A4A;--onGreen:#141A15}}
+:root[data-theme="dark"]{--bg:#141A15;--card:#1D251E;--ink:#F1ECDD;--mute:#B9BFAF;--line:#33402F;--green:#9DBB8F;--gold:#D9A94F;--sage:#4E7A4A;--onGreen:#141A15}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
+.wrap{max-width:1150px;margin:0 auto;padding:28px 20px 56px}
+h1,h2{font-family:Fraunces,Georgia,serif;color:var(--green);margin:0}
+h1{font-size:32px}h2{font-size:22px;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:24px;margin-top:20px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:24px}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+input,select,textarea{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+textarea{min-height:72px;resize:vertical}
+button{min-height:44px;padding:0 20px;border:0;border-radius:999px;background:var(--green);color:var(--onGreen);font:600 16px Inter,sans-serif;cursor:pointer}
+button.alt{background:transparent;color:var(--green);border:2px solid var(--green)}
+button:disabled{opacity:.5;cursor:wait}
+.stu{display:flex;justify-content:space-between;gap:12px;width:100%;text-align:left;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-weight:500}
+.stu[aria-pressed="true"]{border-color:var(--green);background:var(--bg)}
+.stu small{color:var(--mute);font-weight:400}
+.tag{display:inline-block;padding:2px 10px;border-radius:999px;border:1px solid var(--line);font-size:13px;margin-right:6px}
+.ent{border-top:1px solid var(--line);padding:14px 0}
+.ent p{margin:4px 0}
+.mute{color:var(--mute)}
+.sum{white-space:pre-wrap;background:var(--bg);border-radius:12px;padding:14px;margin:12px 0}
+.leg{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin-top:6px}
+.leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.scroll{overflow-x:auto}
+#login{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9}#login[hidden]{display:none}
+.tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tabs button{background:var(--card);color:var(--green);border:2px solid var(--green)}
+.tabs button[aria-selected="true"]{background:var(--green);color:var(--onGreen)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips .stu{width:auto;margin:0}
+.ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.sc{display:block;text-align:left;width:100%;min-height:0;border-radius:14px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:14px;font-weight:400}
+.sc strong{display:block;font-family:Fraunces,Georgia,serif;font-size:18px;color:var(--green)}
+.sc p{margin:4px 0;font-size:14px}
+.bar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--gold)}
+.bd{display:inline-block;padding:4px 12px;border-radius:999px;font-size:14px;margin:0 6px 6px 0;border:1px dashed var(--mute);color:var(--mute)}
+.bd.on{background:var(--green);color:var(--onGreen);border:1px solid var(--green)}
+</style>
+</head>
+<body>
+<div id="login" hidden><form id="lf" class="card" style="max-width:380px;width:100%"><h2>Connect Shepherding</h2><label for="repo">Data repository (owner/name)</label><input id="repo" placeholder="yourname/shepherding-data" required><label for="pw">Access token</label><input id="pw" type="password" required autocomplete="off"><p class="mute" id="lerr" style="margin:8px 0 0"></p><p style="margin:12px 0 0"><button type="submit">Connect</button></p></form></div>
+<div class="wrap">
+<div style="display:flex;align-items:center;gap:14px"><svg viewBox="0 0 64 64" width="52" height="52" aria-hidden="true"><rect width="64" height="64" rx="14" fill="var(--green)"/><path d="M28 58V24C28 10 46 10 46 22" fill="none" stroke="var(--onGreen)" stroke-width="5" stroke-linecap="round"/><path d="M12 54L50 18" stroke="var(--gold)" stroke-width="5" stroke-linecap="round"/><circle cx="51" cy="17" r="5" fill="var(--gold)"/></svg><div><h1>Shepherding</h1><p class="mute" style="margin:0">Caring for each one, one watering at a time.</p></div></div>
+<p class="mute" id="status" style="margin:6px 0 0">Water a branch: log a meeting, and the tree of notes grows.</p>
+<p class="mute" style="margin:8px 0 0"><a href="#" id="bk">Download backup</a> · <a href="#" id="out">Sign out</a></p>
+<div class="grid">
+<div>
+<form class="card" id="f">
+<h2>Water a branch</h2>
+<label for="name">Student</label><input id="name" list="names" required autocomplete="off"><datalist id="names"></datalist>
+<label for="type">Meeting type</label>
+<select id="type"><option>One-on-one</option><option>Home meeting</option><option>Small group</option></select>
+<label for="date">Date</label><input id="date" type="date" required>
+<label for="content">Content of the meeting</label><textarea id="content" placeholder="A few sentences"></textarea>
+<label for="materials">Materials</label><input id="materials">
+<label for="insp">Inspiration</label><textarea id="insp"></textarea>
+<label for="burden">Burden / prayer</label><textarea id="burden"></textarea>
+<p style="margin:16px 0 0"><button type="submit" id="save">Save watering</button></p>
+</form>
+</div>
+<div><div class="tabs" role="tablist"><button type="button" role="tab" id="tab-g">Garden summary</button><button type="button" role="tab" id="tab-i">Individual growth</button></div><div id="main"></div></div>
+</div>
+</div>
+<script>
+var tab='garden',entries=[],sums={},sel=null,db=null,sampleFn=null;
+var $=function(i){return document.getElementById(i)};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var keyOf=function(n){return n.trim().toLowerCase()};
+var sid=function(k){var h=7;for(var i=0;i<k.length;i++)h=(h*31+k.charCodeAt(i))|0;return 's'+(h>>>0)};
+var TYPES=['One-on-one','Home meeting','Small group'],COLS=['var(--green)','var(--gold)','var(--sage)'];
+$('date').value=new Date().toISOString().slice(0,10);
+
+function groups(){var g={};entries.forEach(function(e){(g[e.key]=g[e.key]||[]).push(e)});
+Object.keys(g).forEach(function(k){g[k].sort(function(a,b){return a.date<b.date?1:-1})});return g}
+function days(d){return Math.max(0,Math.floor((Date.now()-new Date(d+'T12:00:00').getTime())/864e5))}
+
+function chart(list){
+var now=new Date(),ms=[];for(var i=5;i>=0;i--){var d=new Date(now.getFullYear(),now.getMonth()-i,1);ms.push({k:d.toISOString().slice(0,7),l:d.toLocaleString('en',{month:'short'}),c:[0,0,0]})}
+list.forEach(function(e){var m=ms.find(function(x){return x.k===e.date.slice(0,7)}),t=TYPES.indexOf(e.type);if(m&&t>-1)m.c[t]++});
+var mx=Math.max(1,Math.max.apply(null,ms.map(function(m){return m.c[0]+m.c[1]+m.c[2]})));
+var s='<svg viewBox="0 0 520 200" width="100%" style="max-width:560px" role="img" aria-label="Meetings per month by type, last six months">';
+ms.forEach(function(m,i){var x=20+i*83,y=170;
+m.c.forEach(function(v,t){var h=v/mx*140;y-=h;if(v)s+='<rect x="'+x+'" y="'+y+'" width="50" height="'+h+'" rx="4" fill="'+COLS[t]+'"/>'});
+s+='<text x="'+(x+25)+'" y="190" text-anchor="middle" font-size="13" fill="currentColor">'+m.l+'</text>';
+var tot=m.c[0]+m.c[1]+m.c[2];if(tot)s+='<text x="'+(x+25)+'" y="'+(y-6)+'" text-anchor="middle" font-size="13" fill="currentColor">'+tot+'</text>'});
+s+='</svg><div class="leg">'+TYPES.map(function(t,i){return '<span><i style="background:'+COLS[i]+'"></i>'+t+'</span>'}).join('')+'</div>';
+return '<div class="scroll">'+s+'</div>'}
+
+function tree(l,small){
+var now=days(l[0].date),n=Math.min(l.length,30),th=60+n*3,tw=6+n*0.35,gy=280,ty=gy-th,wilt=now>21?0.45:1;
+var cfg=[{a:150,f:0.5},{a:30,f:0.62},{a:100,f:1}];
+var s='<svg viewBox="0 0 300 300" style="width:100%;max-width:'+(small?130:340)+'px;display:block;margin:0 auto" role="img" aria-label="Tree with '+l.length+' waterings">';
+s+='<ellipse cx="150" cy="284" rx="90" ry="8" fill="var(--line)"/>';
+s+='<path d="M150 '+gy+' L150 '+ty+'" stroke="#8A6A3A" stroke-width="'+tw.toFixed(1)+'" stroke-linecap="round"/>';
+TYPES.forEach(function(t,i){
+var es=l.filter(function(e){return e.type===t}).sort(function(a,b){return a.date<b.date?-1:1}).slice(-12);
+if(!es.length)return;
+var c=cfg[i],ox=150,oy=gy-th*c.f,len=28+es.length*9,r=c.a*Math.PI/180,ex=ox+len*Math.cos(r),ey=oy-len*Math.sin(r),nx=Math.sin(r),ny=Math.cos(r);
+s+='<path d="M'+ox+' '+oy.toFixed(1)+' L'+ex.toFixed(1)+' '+ey.toFixed(1)+'" stroke="#8A6A3A" stroke-width="'+(3+es.length*0.3).toFixed(1)+'" stroke-linecap="round"/>';
+es.forEach(function(e,j){
+var u=es.length===1?1:0.3+0.7*j/(es.length-1),px=ox+(ex-ox)*u,py=oy+(ey-oy)*u,sd=j%2?1:-1,lx=px+nx*sd*7,ly=py+ny*sd*7;
+s+='<ellipse cx="'+lx.toFixed(1)+'" cy="'+ly.toFixed(1)+'" rx="8" ry="4.5" transform="rotate('+(-c.a+sd*40)+' '+lx.toFixed(1)+' '+ly.toFixed(1)+')" fill="'+(days(e.date)<=14?'var(--green)':'var(--sage)')+'" opacity="'+wilt+'"/>';
+if(e.burden)s+='<circle cx="'+(lx+nx*sd*6).toFixed(1)+'" cy="'+(ly+ny*sd*6).toFixed(1)+'" r="3.2" fill="var(--gold)"/>'})});
+s+='</svg>';
+if(!small)s+='<p class="mute" style="text-align:center;font-size:14px;margin:4px 0 12px">Left branch: one-on-ones · Right: home meetings · Top: small groups · Gold dots: prayer needs held'+(now>21?' · The leaves are drooping: '+now+' days since the last watering.':'')+'</p>';
+return s}
+function wk(d){return Math.floor((Math.floor(Date.UTC(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10))/864e5)+3)/7)}
+function streak(){var s={};entries.forEach(function(e){s[wk(e.date)]=1});var c=wk(new Date().toISOString().slice(0,10)),n=0;if(!s[c])c--;while(s[c]){n++;c--}return n}
+function cut(s,n){s=s||'';return s.length>n?s.slice(0,n)+'…':s}
+function incentives(g,keys){
+var tot=entries.length,st=streak(),n=keys.length;
+var fresh=keys.filter(function(k){return days(g[k][0].date)<=14}).length;
+var home=entries.some(function(e){return e.type==='Home meeting'});
+var mon=new Date().toISOString().slice(0,7);
+var all3=TYPES.every(function(t){return entries.some(function(e){return e.type===t&&e.date.slice(0,7)===mon})});
+var B=[['First watering',tot>=1],['10 waterings',tot>=10],['4-week streak',st>=4],['Every branch watered in 14 days',n>=3&&fresh===n],['Home meeting hosted',home],['All three types this month',all3]];
+var L=[['Seed',0],['Sapling',5],['Young tree',15],['Flourishing tree',40]],lv=0;
+L.forEach(function(x,i){if(tot>=x[1])lv=i});
+var nx=L[lv+1],pct=nx?Math.round((tot-L[lv][1])/(nx[1]-L[lv][1])*100):100;
+return '<div class="card"><h2>Our garden</h2><p style="margin:0"><strong>'+L[lv][0]+'</strong> · '+tot+' watering'+(tot===1?'':'s')+' together</p><div class="bar" role="img" aria-label="'+pct+' percent to the next stage"><i style="width:'+pct+'%"></i></div><p class="mute" style="margin:0 0 12px">'+(nx?(nx[1]-tot)+' more to grow into a '+nx[0].toLowerCase()+'.':'Fully grown. Keep tending it.')+'</p><p><span class="tag">Faithful streak: '+st+' week'+(st===1?'':'s')+'</span><span class="tag">'+fresh+' of '+n+' branches watered in the last 14 days</span></p><div>'+B.map(function(b){return '<span class="bd'+(b[1]?' on':'')+'">'+b[0]+(b[1]?'':' (locked)')+'</span>'}).join('')+'</div></div>'}
+function overview(g,keys){
+var tm=teamSum(g,keys),h=incentives(g,keys);
+h+='<div class="card"><h2>Flock summary</h2>'+chart(entries)+(tm?'<div class="sum">'+esc(tm.text)+'</div><p class="mute" style="font-size:14px">Based on '+tm.n+' entries, '+esc(tm.at)+'</p>':'<p class="mute">No flock summary yet.</p>')+(sampleFn&&entries.length?'<button id="genT" type="button">'+(tm?'Refresh summary':'Generate flock summary')+'</button>':'')+'</div>';
+h+='<div class="card"><h2>All students at a glance</h2>'+(keys.length?'<div class="ov">'+keys.map(function(k){var l=g[k],c=l.find(function(e){return e.burden}),t=l.find(function(e){return e.content});return '<button type="button" class="sc" data-k="'+esc(k)+'">'+tree(l,true)+'<strong>'+esc(l[0].student)+'</strong><p>'+l.length+' watering'+(l.length>1?'s':'')+' · last '+days(l[0].date)+' days ago</p>'+(t?'<p><span class="mute">Latest:</span> '+esc(cut(t.content,110))+'</p>':'')+(c?'<p><span class="mute">Burden / prayer:</span> '+esc(cut(c.burden,110))+'</p>':'')+'</button>'}).join('')+'</div>':'<p class="mute">Nothing yet. Save the first watering.</p>')+'</div>';
+return h}
+function bindOv(){var t=$('genT');if(t)t.onclick=function(){genTeam(t)};document.querySelectorAll('.sc').forEach(function(b){b.onclick=function(){sel=b.dataset.k;tab='indiv';render()}})}
+function today(){return new Date().toISOString().slice(0,10)}
+function bl(l,f,n){var o=l.filter(function(e){return e[f]}).slice(0,n).map(function(e){return '\u2022 '+cut(e[f],140)+' ('+e.date+')'});return o.length?o.join('\n'):''}
+function localSum(l){var c=TYPES.map(function(t){return l.filter(function(e){return e.type===t}).length}),d=days(l[0].date);
+var s=l[0].student+' has been watered '+l.length+(l.length===1?' time':' times')+' since '+l[l.length-1].date+': '+c[0]+' one-on-one, '+c[1]+' home meeting, '+c[2]+' small group. The last watering was '+d+' day'+(d===1?'':'s')+' ago.';
+[['Recently covered','content'],['Materials','materials'],['Inspiration','insp'],['Carrying','burden']].forEach(function(x){var b=bl(l,x[1],3);if(b)s+='\n\n'+x[0]+':\n'+b});
+s+='\n\nNext watering: '+(d>21?'Reach out soon; it has been over three weeks.':d>14?'Plan a visit this week.':'On track. Keep the rhythm.');
+return{text:s,n:l.length,at:today()}}
+function teamSum(g,keys){if(!entries.length)return null;
+var due=keys.filter(function(k){return days(g[k][0].date)>14}).map(function(k){return g[k][0].student+' ('+days(g[k][0].date)+' days)'});
+var pr=entries.filter(function(e){return e.burden}).sort(function(a,b){return a.date<b.date?1:-1}).slice(0,5).map(function(e){return '\u2022 '+e.student+': '+cut(e.burden,120)}),st=streak();
+var s='The team has logged '+entries.length+' waterings across '+keys.length+' student'+(keys.length===1?'':'s')+'. Faithful streak: '+st+' week'+(st===1?'':'s')+'.';
+s+='\n\nWho needs a visit soon: '+(due.length?due.join(', '):'everyone has been watered in the last two weeks.');
+if(pr.length)s+='\n\nRecent prayer needs:\n'+pr.join('\n');
+return{text:s,n:entries.length,at:today()}}
+function render(){
+var g=groups(),keys=Object.keys(g);
+keys.sort(function(a,b){return days(g[b][0].date)-days(g[a][0].date)});
+$('names').innerHTML=keys.map(function(k){return '<option value="'+esc(g[k][0].student)+'">'}).join('');
+$('tab-g').setAttribute('aria-selected',tab==='garden');$('tab-i').setAttribute('aria-selected',tab!=='garden');
+var m=$('main');
+if(tab==='garden'){m.innerHTML=overview(g,keys);bindOv();return}
+if(!keys.length){m.innerHTML='<div class="card"><h2>Individual growth</h2><p class="mute">No students yet. Save the first watering.</p></div>';return}
+if(!sel||!g[sel])sel=keys[0];
+var chips='<div class="card"><h2>Individual growth</h2><div class="chips">'+keys.map(function(k){var q=g[k];return '<button type="button" class="stu" data-k="'+esc(k)+'" aria-pressed="'+(sel===k)+'"><span>'+esc(q[0].student)+'<br><small>last '+days(q[0].date)+'d ago</small></span></button>'}).join('')+'</div></div>';
+var l=g[sel],cnt=TYPES.map(function(t){return l.filter(function(e){return e.type===t}).length}),sm=localSum(l);
+m.innerHTML=chips+'<div class="card"><h2>'+esc(l[0].student)+'</h2><p class="mute" style="margin:0 0 8px">'+l.length+(l.length===1?' watering':' waterings')+' · last watered '+days(l[0].date)+' days ago</p><p>'+TYPES.map(function(t,i){return '<span class="tag">'+t+': '+cnt[i]+'</span>'}).join('')+'</p>'+tree(l,false)+chart(l)+
+'<h2 style="margin-top:20px">Summary</h2>'+(sm?'<div class="sum">'+esc(sm.text)+'</div><p class="mute" style="font-size:14px">Based on '+sm.n+' entries, '+esc(sm.at)+'</p>':'<p class="mute">No summary yet.</p>')+
+(sampleFn?'<button id="gen" type="button">'+(sm?'Refresh summary':'Generate summary')+'</button>':'<p class="mute"></p>')+'</div>'+
+'<div class="card"><h2>Timeline</h2>'+l.map(function(e){return '<div class="ent"><button type="button" class="alt" data-del="'+e.id+'" style="min-height:32px;padding:0 12px;font-size:14px;float:right">Delete</button><strong>'+esc(e.date)+'</strong> <span class="tag">'+esc(e.type)+'</span>'+(e.content?'<p>'+esc(e.content)+'</p>':'')+(e.materials?'<p><span class="mute">Materials:</span> '+esc(e.materials)+'</p>':'')+(e.insp?'<p><span class="mute">Inspiration:</span> '+esc(e.insp)+'</p>':'')+(e.burden?'<p><span class="mute">Burden / prayer:</span> '+esc(e.burden)+'</p>':'')+'</div>'}).join('')+'</div>';
+var b=$('gen');if(b)b.onclick=function(){gen(sel,b)};document.querySelectorAll('.chips .stu').forEach(function(c){c.onclick=function(){sel=c.dataset.k;render()}})}
+
+var CFG=null,sha=null;
+try{CFG=JSON.parse(localStorage.getItem('shCfg')||'null')}catch(e){}
+function API(){return 'https://api.github.com/repos/'+CFG.repo+'/contents/entries.json'}
+function hdr(){return{'Authorization':'Bearer '+CFG.token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}}
+function dec(b){var bin=atob(b.replace(/\n/g,'')),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u)}
+function enc(s){var u=new TextEncoder().encode(s),b='';for(var i=0;i<u.length;i++)b+=String.fromCharCode(u[i]);return btoa(b)}
+async function pull(){var r=await fetch(API()+'?t='+Date.now(),{headers:hdr(),cache:'no-store'});
+if(r.status===404){sha=null;return{entries:[]}}
+if(r.status===401||r.status===403){$('login').hidden=false;throw new Error('auth')}
+if(!r.ok)throw new Error('GitHub error '+r.status);
+var j=await r.json();sha=j.sha;var d=JSON.parse(dec(j.content)||'{}');d.entries=d.entries||[];return d}
+async function push(d,msg){var r=await fetch(API(),{method:'PUT',headers:Object.assign({'Content-Type':'application/json'},hdr()),body:JSON.stringify({message:msg,content:enc(JSON.stringify(d,null,1)),sha:sha||undefined})});
+if(r.status===409||r.status===422)return false;if(!r.ok)throw new Error('GitHub error '+r.status);sha=(await r.json()).content.sha;return true}
+async function mutate(fn,msg){for(var i=0;i<3;i++){var d=await pull();fn(d);if(await push(d,msg)){entries=d.entries;render();return}}throw new Error('Someone else saved at the same moment. Please try again.')}
+function load(){return pull().then(function(d){entries=d.entries;render()})}
+$('tab-g').onclick=function(){tab='garden';render()};
+$('tab-i').onclick=function(){tab='indiv';render()};
+$('main').addEventListener('click',function(ev){var d=ev.target.closest('[data-del]');if(d&&confirm('Delete this watering?')){var id=d.dataset.del;mutate(function(x){x.entries=x.entries.filter(function(e){return String(e.id)!==id})},'Delete watering').catch(function(e){$('status').textContent=e.message})}});
+$('f').onsubmit=async function(ev){ev.preventDefault();var n=$('name').value.trim();if(!n||!CFG)return;
+var o={id:Date.now()*1000+Math.floor(Math.random()*1000),student:n.slice(0,200),key:keyOf(n),type:$('type').value,date:$('date').value,content:$('content').value.trim(),materials:$('materials').value.trim(),insp:$('insp').value.trim(),burden:$('burden').value.trim(),created:new Date().toISOString()};
+$('save').disabled=true;
+try{await mutate(function(d){d.entries.push(o)},'Add watering')}catch(e){$('status').textContent='Could not save: '+e.message;$('save').disabled=false;return}
+['content','materials','insp','burden'].forEach(function(i){$(i).value=''});sel=keyOf(n);tab='indiv';$('save').disabled=false;$('status').textContent='Watered. '+n+'\u2019s branch is watered. Thank you for showing up.';render()};
+$('lf').onsubmit=async function(ev){ev.preventDefault();CFG={repo:$('repo').value.trim(),token:$('pw').value.trim()};$('lerr').textContent='';
+try{var r=await fetch('https://api.github.com/repos/'+CFG.repo,{headers:hdr()});if(!r.ok)throw new Error('Could not reach that repository. Check the name and the token.');
+await load();localStorage.setItem('shCfg',JSON.stringify(CFG));$('pw').value='';$('login').hidden=true}catch(e){$('lerr').textContent=e.message==='auth'?'That token was not accepted.':e.message}};
+$('out').onclick=function(ev){ev.preventDefault();try{localStorage.removeItem('shCfg')}catch(e){}CFG=null;entries=[];render();$('login').hidden=false};
+$('bk').onclick=function(ev){ev.preventDefault();var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({entries:entries},null,1)],{type:'application/json'}));a.download='shepherding-backup-'+today()+'.json';a.click()};
+render();
+if(CFG)load().catch(function(){});else $('login').hidden=false;
+setInterval(function(){if(CFG&&$('login').hidden)load().catch(function(){})},30000);
+</script>
+</body>
+</html>
