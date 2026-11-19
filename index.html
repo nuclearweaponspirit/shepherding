@@ -52,11 +52,11 @@ button:disabled{opacity:.5;cursor:wait}
 </style>
 </head>
 <body>
-<div id="login" hidden><form id="lf" class="card" style="max-width:380px;width:100%"><h2>Connect Shepherding</h2><label for="repo">Data repository (owner/name)</label><input id="repo" placeholder="yourname/shepherding-data" required><label for="pw">Access token</label><input id="pw" type="password" required autocomplete="off"><p class="mute" id="lerr" style="margin:8px 0 0"></p><p style="margin:12px 0 0"><button type="submit">Connect</button></p></form></div>
+<div id="login" hidden><form id="lf" class="card" style="max-width:380px;width:100%"><h2>Connect Shepherding</h2><div id="rp"><label for="repo">Data repository (owner/name)</label><input id="repo" placeholder="yourname/shepherding-data"></div><label for="pw" id="pwl">Access token</label><input id="pw" type="password" required autocomplete="off"><p class="mute" id="alt" style="margin:8px 0 0"></p><p class="mute" id="lerr" style="margin:8px 0 0"></p><p style="margin:12px 0 0"><button type="submit">Connect</button></p></form></div>
 <div class="wrap">
 <div style="display:flex;align-items:center;gap:14px"><svg viewBox="0 0 64 64" width="52" height="52" aria-hidden="true"><rect width="64" height="64" rx="14" fill="var(--green)"/><path d="M28 58V24C28 10 46 10 46 22" fill="none" stroke="var(--onGreen)" stroke-width="5" stroke-linecap="round"/><path d="M12 54L50 18" stroke="var(--gold)" stroke-width="5" stroke-linecap="round"/><circle cx="51" cy="17" r="5" fill="var(--gold)"/></svg><div><h1>Shepherding</h1><p class="mute" style="margin:0">Caring for each one, one watering at a time.</p></div></div>
 <p class="mute" id="status" style="margin:6px 0 0">Water a branch: log a meeting, and the tree of notes grows.</p>
-<p class="mute" style="margin:8px 0 0"><a href="#" id="bk">Download backup</a> · <a href="#" id="lk">Copy team link</a> · <a href="#" id="out">Sign out</a></p>
+<p class="mute" style="margin:8px 0 0"><a href="#" id="bk">Download backup</a> · <a href="#" id="lk">Copy team link</a> · <a href="#" id="tp">Create team password</a> · <a href="#" id="out">Sign out</a></p>
 <div class="grid">
 <div>
 <form class="card" id="f">
@@ -193,12 +193,24 @@ var o={id:Date.now()*1000+Math.floor(Math.random()*1000),student:n.slice(0,200),
 $('save').disabled=true;
 try{await mutate(function(d){d.entries.push(o)},'Add watering')}catch(e){$('status').textContent='Could not save: '+e.message;$('save').disabled=false;return}
 ['content','materials','insp','burden'].forEach(function(i){$(i).value=''});sel=keyOf(n);tab='indiv';$('save').disabled=false;$('status').textContent='Watered. '+n+'\u2019s branch is watered. Thank you for showing up.';render()};
-$('lf').onsubmit=async function(ev){ev.preventDefault();CFG={repo:$('repo').value.trim(),token:$('pw').value.trim()};$('lerr').textContent='';
-try{var r=await fetch('https://api.github.com/repos/'+CFG.repo,{headers:hdr()});if(!r.ok)throw new Error('Could not reach that repository. Check the name and the token.');
-await load();localStorage.setItem('shCfg',JSON.stringify(CFG));$('pw').value='';$('login').hidden=true}catch(e){$('lerr').textContent=e.message==='auth'?'That token was not accepted.':e.message}};
+var TEAM=null;
+function b64(u){var s='';for(var i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s)}
+function ub(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
+async function dk(pw,salt){var m=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:600000,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function lock(pw,o){var s=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),k=await dk(pw,s),c=await crypto.subtle.encrypt({name:'AES-GCM',iv:iv},k,new TextEncoder().encode(JSON.stringify(o)));return{v:1,s:b64(s),i:b64(iv),c:b64(new Uint8Array(c))}}
+async function unlock(pw,b){var k=await dk(pw,ub(b.s)),p=await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(b.i)},k,ub(b.c));return JSON.parse(new TextDecoder().decode(p))}
+function mode(){$('rp').hidden=!!TEAM;$('pwl').textContent=TEAM?'Team password':'Access token';$('alt').innerHTML=TEAM?'<a href="#" id="alt1">Use an access token instead</a>':'';var a=$('alt1');if(a)a.onclick=function(e){e.preventDefault();TEAM=null;mode()}}
+$('lf').onsubmit=async function(ev){ev.preventDefault();$('lerr').textContent='';
+try{if(TEAM){try{CFG=await unlock($('pw').value,TEAM)}catch(e){throw new Error('Wrong password.')}}else CFG={repo:$('repo').value.trim(),token:$('pw').value.trim()};
+if(!CFG.repo||!CFG.token)throw new Error('Enter the repository name and token.');
+var r=await fetch('https://api.github.com/repos/'+CFG.repo,{headers:hdr()});if(!r.ok)throw new Error('Could not reach that repository. Check the name and the token.');
+await load();localStorage.setItem('shCfg',JSON.stringify(CFG));$('pw').value='';$('login').hidden=true}catch(e){CFG=null;$('lerr').textContent=e.message==='auth'?'That token was not accepted.':e.message}};
+$('tp').onclick=async function(ev){ev.preventDefault();if(!CFG)return;var p=prompt('Choose a team password: at least 12 characters, such as four random words. Anyone who has it can open your notes.');if(!p)return;if(p.length<12){alert('Please use at least 12 characters.');return}
+var b=await lock(p,CFG),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(b)],{type:'application/json'}));a.download='team.json';a.click();$('status').textContent='Now upload team.json to your shepherding repository, next to index.html.'};
 $('out').onclick=function(ev){ev.preventDefault();try{localStorage.removeItem('shCfg')}catch(e){}CFG=null;entries=[];render();$('login').hidden=false};
 $('lk').onclick=function(ev){ev.preventDefault();if(!CFG)return;var u=location.origin+location.pathname+'#cfg='+encodeURIComponent(btoa(JSON.stringify(CFG)));(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(function(){$('status').textContent='Team link copied. Send it only to your team.'},function(){prompt('Copy this link',u)})};
 $('bk').onclick=function(ev){ev.preventDefault();var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({entries:entries},null,1)],{type:'application/json'}));a.download='shepherding-backup-'+today()+'.json';a.click()};
+if(!CFG)fetch('team.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){if(j&&j.c){TEAM=j;mode()}}).catch(function(){});
 render();
 if(CFG)load().catch(function(){});else $('login').hidden=false;
 setInterval(function(){if(CFG&&$('login').hidden)load().catch(function(){})},30000);
