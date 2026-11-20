@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Shepherding</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F3A2B'/%3E%3Cpath d='M28 58V24C28 10 46 10 46 22' fill='none' stroke='%23F6F1E4' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M12 54L50 18' stroke='%23C8963E' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='51' cy='17' r='5' fill='%23C8963E'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F3A2B'/%3E%3Cpath d='M28 58V24C28 10 46 10 46 22' fill='none' stroke='%23F6F1E4' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M52 56L20 24' stroke='%23C8963E' stroke-width='5' stroke-linecap='round'/%3E%3Crect x='7' y='17.5' width='22' height='9' rx='2' fill='%23C8963E' transform='rotate(-45 18 22)'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap">
 <style>
 :root{--bg:#F6F1E4;--card:#FFFDF7;--ink:#1B1F1A;--mute:#4A5045;--line:#DCD2B8;--green:#1F3A2B;--gold:#C8963E;--sage:#9DBB8F;--onGreen:#F6F1E4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -13,11 +13,9 @@
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
-.wrap{max-width:1150px;margin:0 auto;padding:28px 20px 56px}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 20px 56px}
 h1,h2{font-family:Fraunces,Georgia,serif;color:var(--green);margin:0}
 h1{font-size:32px}h2{font-size:22px;margin-bottom:12px}
-.grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:24px;margin-top:20px}
-@media(max-width:860px){.grid{grid-template-columns:1fr}}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:24px}
 label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
 input,select,textarea{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
@@ -25,191 +23,219 @@ textarea{min-height:72px;resize:vertical}
 button{min-height:44px;padding:0 20px;border:0;border-radius:999px;background:var(--green);color:var(--onGreen);font:600 16px Inter,sans-serif;cursor:pointer}
 button.alt{background:transparent;color:var(--green);border:2px solid var(--green)}
 button:disabled{opacity:.5;cursor:wait}
-.stu{display:flex;justify-content:space-between;gap:12px;width:100%;text-align:left;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-weight:500}
+.tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.tabs button{background:var(--card);color:var(--green);border:2px solid var(--green)}
+.tabs button[aria-selected="true"]{background:var(--green);color:var(--onGreen)}
+.pages button{min-height:52px;font-size:18px}
+.stu{display:flex;justify-content:space-between;gap:12px;text-align:left;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:500}
 .stu[aria-pressed="true"]{border-color:var(--green);background:var(--bg)}
-.stu small{color:var(--mute);font-weight:400}
-.tag{display:inline-block;padding:2px 10px;border-radius:999px;border:1px solid var(--line);font-size:13px;margin-right:6px}
-.ent{border-top:1px solid var(--line);padding:14px 0}
-.ent p{margin:4px 0}
-.mute{color:var(--mute)}
+.stu small,.mute{color:var(--mute);font-weight:400}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.tag{display:inline-block;padding:2px 10px;border-radius:999px;border:1px solid var(--line);font-size:13px;margin:0 6px 6px 0}
+.ent{border-top:1px solid var(--line);padding:12px 0}.ent p{margin:4px 0}
 .sum{white-space:pre-wrap;background:var(--bg);border-radius:12px;padding:14px;margin:12px 0}
 .leg{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin-top:6px}
 .leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 .scroll{overflow-x:auto}
-#login{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9}#login[hidden]{display:none}
-.tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.tabs button{background:var(--card);color:var(--green);border:2px solid var(--green)}
-.tabs button[aria-selected="true"]{background:var(--green);color:var(--onGreen)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips .stu{width:auto;margin:0}
 .ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 .sc{display:block;text-align:left;width:100%;min-height:0;border-radius:14px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:14px;font-weight:400}
-.sc strong{display:block;font-family:Fraunces,Georgia,serif;font-size:18px;color:var(--green)}
-.sc p{margin:4px 0;font-size:14px}
+.sc strong{display:block;font-family:Fraunces,Georgia,serif;font-size:18px;color:var(--green)}.sc p{margin:4px 0;font-size:14px}
 .bar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--gold)}
 .bd{display:inline-block;padding:4px 12px;border-radius:999px;font-size:14px;margin:0 6px 6px 0;border:1px dashed var(--mute);color:var(--mute)}
 .bd.on{background:var(--green);color:var(--onGreen);border:1px solid var(--green)}
+.row{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:8px 0}
+details{border-top:1px solid var(--line);padding:8px 0}summary{cursor:pointer;font-weight:600}
+details.card{padding:14px 20px;margin-bottom:12px}details.card>summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:32px;font:600 20px Fraunces,Georgia,serif;color:var(--green)}details.card>summary::-webkit-details-marker{display:none}details.card>summary small{margin-left:auto;font:400 14px Inter,sans-serif;color:var(--mute)}details.card>summary::after{content:"▾"}details.card[open]>summary::after{content:"▴"}details.card[open]>summary{margin-bottom:12px}
+.q{margin:0 0 8px;padding:4px 0 4px 16px;border-left:4px solid var(--gold);font:italic 600 18px/1.6 Fraunces,Georgia,serif;color:var(--green)}.q small{display:block;font:400 14px Inter,sans-serif;color:var(--mute);margin-top:4px}
+#login{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9}#login[hidden]{display:none}
+#pop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9}#pop[hidden]{display:none}
+#pop .card{max-width:440px;text-align:center;margin:0}
+#pop p{font-family:Fraunces,Georgia,serif;font-size:24px;color:var(--green);margin:12px 0 20px}
+@keyframes fall{from{transform:translateY(-14px);opacity:0}to{transform:none;opacity:1}}#pop svg{animation:fall .6s ease-out}
 </style>
 </head>
 <body>
 <div id="login" hidden><form id="lf" class="card" style="max-width:380px;width:100%"><h2>Connect Shepherding</h2><div id="rp"><label for="repo">Data repository (owner/name)</label><input id="repo" placeholder="yourname/shepherding-data"></div><label for="pw" id="pwl">Access token</label><input id="pw" type="password" required autocomplete="off"><label style="display:flex;gap:8px;align-items:center;font-weight:400;margin:10px 0 0"><input type="checkbox" id="sp" style="width:20px;height:20px;min-height:0"> Show password</label><p class="mute" id="alt" style="margin:8px 0 0"></p><p class="mute" id="lerr" style="margin:8px 0 0"></p><p style="margin:12px 0 0"><button type="submit">Connect</button></p></form></div>
 <div class="wrap">
-<div style="display:flex;align-items:center;gap:14px"><svg viewBox="0 0 64 64" width="52" height="52" aria-hidden="true"><rect width="64" height="64" rx="14" fill="var(--green)"/><path d="M28 58V24C28 10 46 10 46 22" fill="none" stroke="var(--onGreen)" stroke-width="5" stroke-linecap="round"/><path d="M12 54L50 18" stroke="var(--gold)" stroke-width="5" stroke-linecap="round"/><circle cx="51" cy="17" r="5" fill="var(--gold)"/></svg><div><h1>Shepherding</h1><p class="mute" style="margin:0">Caring for each one, one watering at a time.</p></div></div>
-<p class="mute" id="status" style="margin:6px 0 0">Water a branch: log a meeting, and the tree of notes grows.</p>
+<div style="display:flex;align-items:center;gap:14px"><svg viewBox="0 0 64 64" width="52" height="52" aria-hidden="true"><rect width="64" height="64" rx="14" fill="var(--green)"/><path d="M28 58V24C28 10 46 10 46 22" fill="none" stroke="var(--onGreen)" stroke-width="5" stroke-linecap="round"/><path d="M52 56L20 24" stroke="var(--gold)" stroke-width="5" stroke-linecap="round"/><rect x="7" y="17.5" width="22" height="9" rx="2" fill="var(--gold)" transform="rotate(-45 18 22)"/></svg><div><h1>Shepherding</h1><p class="mute" style="margin:0"><b>1 Cor 3:6</b> I planted, Apollos watered, but God caused the growth.</p><p class="mute" style="margin:0">One visit is one drop of water.</p></div></div>
 <p class="mute" style="margin:8px 0 0"><a href="#" id="bk">Download backup</a> · <a href="#" id="out">Sign out</a></p>
-<div class="grid">
-<div>
+<div class="tabs pages" role="tablist"><button type="button" role="tab" id="pg1">1 · I watered</button><button type="button" role="tab" id="pg2">2 · The garden</button></div>
+<p class="mute" id="status" style="margin:0 0 12px;min-height:24px"></p>
+<section id="p1" style="max-width:680px">
 <form class="card" id="f">
-<h2>Water a branch</h2>
+<h2 id="fh">I watered</h2>
+<label for="by">Serving one</label><input id="by" list="bys" required autocomplete="off"><datalist id="bys"></datalist>
 <label for="name">Student</label><input id="name" list="names" required autocomplete="off"><datalist id="names"></datalist>
 <label for="type">Meeting type</label>
-<select id="type"><option>One-on-one</option><option>Home meeting</option><option>Small group</option></select>
+<select id="type"><option>One-on-one</option><option>Small group</option></select>
 <label for="date">Date</label><input id="date" type="date" required>
 <label for="content">Content of the meeting</label><textarea id="content" placeholder="A few sentences"></textarea>
 <label for="materials">Materials</label><input id="materials">
-<label for="insp">Inspiration</label><textarea id="insp"></textarea>
-<label for="burden">Burden / prayer</label><textarea id="burden"></textarea>
-<p style="margin:16px 0 0"><button type="submit" id="save">Save watering</button></p>
+<label for="insp">Student overflow</label><textarea id="insp"></textarea>
+<label for="burden">What can we pray for the student?</label><textarea id="burden"></textarea>
+<p style="margin:16px 0 0;display:flex;gap:8px;flex-wrap:wrap"><button type="submit" id="save">I watered</button><button type="button" class="alt" id="cancel" hidden>Cancel</button></p>
 </form>
+<details class="card"><summary><span>Recent drops</span><small>delete a wrong record</small></summary><div><p class="mute" style="margin:8px 0">If a record is wrong, delete it here and enter it again.</p><div id="recent"></div></div></details>
+</section>
+<section id="p2" hidden><div class="tabs" id="sub" role="tablist"></div><div id="main"></div></section>
 </div>
-<div><div class="tabs" role="tablist"><button type="button" role="tab" id="tab-g">Garden summary</button><button type="button" role="tab" id="tab-i">Individual growth</button></div><div id="main"></div></div>
-</div>
-</div>
+<div id="pop" hidden role="dialog" aria-modal="true"><div class="card"><svg viewBox="-12 -14 24 28" width="64" height="76" aria-hidden="true"><path d="M0 -8C5 -1 7 3 7 5A7 7 0 0 1 -7 5C-7 3 -5 -1 0 -8Z" fill="#4FA3D9" stroke="#fff" stroke-width="1.2"/></svg><p id="popt"></p><button type="button" id="popx">Amen</button></div></div>
 <script>
-var tab='garden',entries=[],sums={},sel=null,db=null,sampleFn=null;
-var $=function(i){return document.getElementById(i)};
-var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
-var keyOf=function(n){return n.trim().toLowerCase()};
-var sid=function(k){var h=7;for(var i=0;i<k.length;i++)h=(h*31+k.charCodeAt(i))|0;return 's'+(h>>>0)};
-var TYPES=['One-on-one','Home meeting','Small group'],COLS=['var(--green)','var(--gold)','var(--sage)'];
-$('date').value=new Date().toISOString().slice(0,10);
+let editId=null,showAll=false,armed=null,page=1,tab='garden',entries=[],sums={},sel=null,who=null,wkOff=0,yr=String(new Date().getFullYear());
+const $=i=>document.getElementById(i),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),keyOf=n=>n.trim().toLowerCase();
+const sid=k=>{let h=7;for(const c of k)h=(h*31+c.charCodeAt(0))|0;return 's'+(h>>>0)};
+const TYPES=['One-on-one','Small group'],DC=['#2E6FA8','#6FB8E8'],MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const MS=[[2,'Praise the Lord! By His grace, you have watered 2 times!'],[5,'Hallelujah! By His grace, you have watered 5 times!'],[7,'Oh Lord Amen Hallelujah! By His grace, you have watered 7 times!']];
+const today=()=>new Date().toISOString().slice(0,10),cut=(s,n)=>{s=s||'';return s.length>n?s.slice(0,n)+'…':s};
+const days=d=>Math.max(0,Math.floor((Date.now()-new Date(d+'T12:00:00').getTime())/864e5));
+const by=e=>e.by||'Not recorded',bk=e=>e.byKey||'not recorded',pl=(n,w)=>n+' '+(n===1?w:w==='entry'?'entries':w+'s');
+const wk=d=>Math.floor((Math.floor(Date.UTC(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10))/864e5)+3)/7);
+const wkD=(i,o)=>new Date((i*7-3+o)*864e5).toISOString().slice(0,10);
+const grp=(f,l)=>{const g={};(l||entries).forEach(e=>(g[f(e)]=g[f(e)]||[]).push(e));Object.values(g).forEach(a=>a.sort((x,y)=>x.date<y.date?1:-1));return g};
+const wc=(k,i)=>entries.filter(e=>bk(e)===k&&wk(e.date)===i).length;
+const streak=()=>{const s={};entries.forEach(e=>s[wk(e.date)]=1);let c=wk(today()),n=0;if(!s[c])c--;while(s[c]){n++;c--}return n};
+const last6=()=>{const n=new Date(),o=[];for(let i=5;i>=0;i--){const d=new Date(n.getFullYear(),n.getMonth()-i,1);o.push([d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'),MN[d.getMonth()]])}return o};
+const yearM=y=>MN.map((m,i)=>[y+'-'+String(i+1).padStart(2,'0'),m]);
+$('date').value=today();
 
-function groups(){var g={};entries.forEach(function(e){(g[e.key]=g[e.key]||[]).push(e)});
-Object.keys(g).forEach(function(k){g[k].sort(function(a,b){return a.date<b.date?1:-1})});return g}
-function days(d){return Math.max(0,Math.floor((Date.now()-new Date(d+'T12:00:00').getTime())/864e5))}
+function chartM(list,ms){const rows=ms.map(m=>({l:m[1],c:TYPES.map(t=>list.filter(e=>e.type===t&&e.date.slice(0,7)===m[0]).length)})),mx=Math.max(1,...rows.map(r=>r.c.reduce((x,y)=>x+y,0))),st=500/rows.length,bw=st*.62;
+let s='<svg viewBox="0 0 520 200" width="100%" style="max-width:600px" role="img" aria-label="Drops of water per month by type">';
+rows.forEach((r,i)=>{const x=10+i*st;let y=170;r.c.forEach((v,t)=>{const h=v/mx*140;y-=h;if(v)s+=`<rect x="${x}" y="${y}" width="${bw}" height="${h}" rx="3" fill="${DC[t]}"/>`});const tot=r.c.reduce((x,y)=>x+y,0);s+=`<text x="${x+bw/2}" y="190" text-anchor="middle" font-size="12" fill="currentColor">${r.l}</text>`;if(tot)s+=`<text x="${x+bw/2}" y="${y-5}" text-anchor="middle" font-size="12" fill="currentColor">${tot}</text>`});
+return '<div class="scroll">'+s+'</svg></div><div class="leg">'+TYPES.map((t,i)=>`<span><i style="background:${DC[i]}"></i>${t}</span>`).join('')+'</div>'}
 
-function chart(list){
-var now=new Date(),ms=[];for(var i=5;i>=0;i--){var d=new Date(now.getFullYear(),now.getMonth()-i,1);ms.push({k:d.toISOString().slice(0,7),l:d.toLocaleString('en',{month:'short'}),c:[0,0,0]})}
-list.forEach(function(e){var m=ms.find(function(x){return x.k===e.date.slice(0,7)}),t=TYPES.indexOf(e.type);if(m&&t>-1)m.c[t]++});
-var mx=Math.max(1,Math.max.apply(null,ms.map(function(m){return m.c[0]+m.c[1]+m.c[2]})));
-var s='<svg viewBox="0 0 520 200" width="100%" style="max-width:560px" role="img" aria-label="Meetings per month by type, last six months">';
-ms.forEach(function(m,i){var x=20+i*83,y=170;
-m.c.forEach(function(v,t){var h=v/mx*140;y-=h;if(v)s+='<rect x="'+x+'" y="'+y+'" width="50" height="'+h+'" rx="4" fill="'+COLS[t]+'"/>'});
-s+='<text x="'+(x+25)+'" y="190" text-anchor="middle" font-size="13" fill="currentColor">'+m.l+'</text>';
-var tot=m.c[0]+m.c[1]+m.c[2];if(tot)s+='<text x="'+(x+25)+'" y="'+(y-6)+'" text-anchor="middle" font-size="13" fill="currentColor">'+tot+'</text>'});
-s+='</svg><div class="leg">'+TYPES.map(function(t,i){return '<span><i style="background:'+COLS[i]+'"></i>'+t+'</span>'}).join('')+'</div>';
-return '<div class="scroll">'+s+'</div>'}
-
-function tree(l,small){
-var now=days(l[0].date),n=Math.min(l.length,30),th=60+n*3,tw=6+n*0.35,gy=280,ty=gy-th,wilt=now>21?0.45:1;
-var cfg=[{a:150,f:0.5},{a:30,f:0.62},{a:100,f:1}];
-var s='<svg viewBox="0 0 300 300" style="width:100%;max-width:'+(small?130:340)+'px;display:block;margin:0 auto" role="img" aria-label="Tree with '+l.length+' waterings">';
-s+='<ellipse cx="150" cy="284" rx="90" ry="8" fill="var(--line)"/>';
-s+='<path d="M150 '+gy+' L150 '+ty+'" stroke="#8A6A3A" stroke-width="'+tw.toFixed(1)+'" stroke-linecap="round"/>';
-TYPES.forEach(function(t,i){
-var es=l.filter(function(e){return e.type===t}).sort(function(a,b){return a.date<b.date?-1:1}).slice(-12);
-if(!es.length)return;
-var c=cfg[i],ox=150,oy=gy-th*c.f,len=28+es.length*9,r=c.a*Math.PI/180,ex=ox+len*Math.cos(r),ey=oy-len*Math.sin(r),nx=Math.sin(r),ny=Math.cos(r);
-s+='<path d="M'+ox+' '+oy.toFixed(1)+' L'+ex.toFixed(1)+' '+ey.toFixed(1)+'" stroke="#8A6A3A" stroke-width="'+(3+es.length*0.3).toFixed(1)+'" stroke-linecap="round"/>';
-es.forEach(function(e,j){
-var u=es.length===1?1:0.3+0.7*j/(es.length-1),px=ox+(ex-ox)*u,py=oy+(ey-oy)*u,sd=j%2?1:-1,lx=px+nx*sd*7,ly=py+ny*sd*7;
-s+='<ellipse cx="'+lx.toFixed(1)+'" cy="'+ly.toFixed(1)+'" rx="8" ry="4.5" transform="rotate('+(-c.a+sd*40)+' '+lx.toFixed(1)+' '+ly.toFixed(1)+')" fill="'+(days(e.date)<=14?'var(--green)':'var(--sage)')+'" opacity="'+wilt+'"/>';
-if(e.burden)s+='<circle cx="'+(lx+nx*sd*6).toFixed(1)+'" cy="'+(ly+ny*sd*6).toFixed(1)+'" r="3.2" fill="var(--gold)"/>'})});
+const drop=(x,y,c,p)=>`<path transform="translate(${x} ${y})" d="M0 -8C5 -1 7 3 7 5A7 7 0 0 1 -7 5C-7 3 -5 -1 0 -8Z" fill="${c}" stroke="${p?'#C8963E':'#fff'}" stroke-width="${p?2.4:1.2}"/>`;
+const PT=['sprig','flower','tree','vine','bush'],PN=['leafy sprout','sunflower','tree','vine','bush'],GR=['#5C8A4A','#4F9A6B','#6B9B3F','#3F8A5A','#7AA24A'];
+const pIdx=k=>{const f={};entries.forEach(e=>{const c=e.created||0;if(f[e.key]==null||c<f[e.key])f[e.key]=c});return Object.keys(f).sort((a,b)=>f[a]-f[b]||(a<b?-1:1)).indexOf(k)};
+const grid=(x0,y0,x1,y1,dx,dy,f)=>{const o=[];for(let y=y1,r=0;y>=y0;y-=dy,r++)for(let x=x0+(r%2)*dx/2;x<=x1;x+=dx)if(f(x,y))o.push([x,y]);return o};
+const inC=(x,y,cs)=>cs.some(c=>(x-c[0])**2+(y-c[1])**2<=(c[2]-10)**2);
+const circ=(cs,f)=>cs.map(c=>`<circle cx="${c[0]}" cy="${c[1]}" r="${c[2]}" fill="${f}"/>`).join('');
+function shape(t,lf,st,pc){let s='',p=[];
+if(t==='sprig'){s+=`<path d="M150 284V70" stroke="${st}" stroke-width="8" stroke-linecap="round"/>`;for(let j=0;j<12;j++){const sd=j%2?1:-1,y=252-Math.floor(j/2)*32,cx=150+sd*34;s+=`<ellipse cx="${cx}" cy="${y-10}" rx="32" ry="12" fill="${lf}" transform="rotate(${sd*-20} ${cx} ${y-10})"/>`;for(let k=0;k<3;k++)p.push([150+sd*(20+k*14),y-8-k*4])}s+=`<ellipse cx="150" cy="62" rx="12" ry="22" fill="${lf}"/>`}
+else if(t==='flower'){s+=`<path d="M150 284V104" stroke="${st}" stroke-width="7" stroke-linecap="round"/><ellipse cx="118" cy="232" rx="34" ry="11" fill="${lf}" transform="rotate(-25 118 232)"/><ellipse cx="182" cy="204" rx="34" ry="11" fill="${lf}" transform="rotate(25 182 204)"/>`;p=[[100,238],[116,232],[132,226],[168,210],[184,204],[198,198]];
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),n=Math.sin(a);s+=`<ellipse cx="${150+c*40}" cy="${92+n*40}" rx="24" ry="10" fill="${pc}" transform="rotate(${i*30} ${150+c*40} ${92+n*40})"/>`;p.push([150+c*32,92+n*32],[150+c*50,92+n*50])}s+='<circle cx="150" cy="92" r="20" fill="#8A5A2B"/>'}
+else if(t==='tree'){const cs=[[150,112,60],[106,142,40],[194,142,40]];s+=`<path d="M150 284V160" stroke="#7A5A3A" stroke-width="18" stroke-linecap="round"/>`+circ(cs,lf);p=grid(80,60,220,175,20,17,(x,y)=>inC(x,y,cs))}
+else if(t==='vine'){s+=`<path d="M150 284C110 240 190 210 150 170C110 130 190 100 150 60" fill="none" stroke="${st}" stroke-width="6" stroke-linecap="round"/>`;[[128,262],[172,232],[126,206],[170,180],[128,152],[172,126],[128,102],[168,80],[132,62],[162,44]].forEach(c=>{s+=`<circle cx="${c[0]}" cy="${c[1]}" r="17" fill="${lf}"/>`;p.push([c[0]-8,c[1]+4],[c[0]+8,c[1]+4],[c[0],c[1]-8])})}
+else{const cs=[[104,236,46],[196,236,46],[150,206,56]];s+=circ(cs,lf);p=grid(66,165,234,282,20,17,(x,y)=>inC(x,y,cs))}
+p.sort((a,b)=>b[1]-a[1]);return{s,p}}
+function plant(l,small){const now=days(l[0].date),dry=now>21,ix=Math.max(0,pIdx(l[0].key)),sh=shape(PT[ix%5],dry?'#A9B38B':GR[Math.floor(ix/5)%5],dry?'#8E9570':'#4E7A4A',dry?'#D9CFA0':'#F2C94C'),n=Math.min(36,sh.p.length);
+let s=`<svg viewBox="0 0 300 300" style="width:100%;max-width:${small?130:340}px;display:block;margin:0 auto" role="img" aria-label="${PN[ix%5]} with ${l.length} drops of water"><ellipse cx="150" cy="286" rx="80" ry="8" fill="var(--line)"/>${sh.s}`;
+l.slice().sort((a,b)=>a.date<b.date?-1:1).slice(-n).forEach((e,i)=>{s+=drop(sh.p[i][0],sh.p[i][1],DC[Math.max(0,TYPES.indexOf(e.type))],!!e.burden)});
 s+='</svg>';
-if(!small)s+='<p class="mute" style="text-align:center;font-size:14px;margin:4px 0 12px">Left branch: one-on-ones · Right: home meetings · Top: small groups · Gold dots: prayer needs held'+(now>21?' · The leaves are drooping: '+now+' days since the last watering.':'')+'</p>';
+if(!small)s+=`<p class="mute" style="text-align:center;font-size:14px;margin:4px 0 12px">This plant: ${PN[ix%5]} · each drop of water is one visit: dark blue one-on-one, light blue small group · gold edge: a prayer need held${l.length>n?' · showing the latest '+n:''}${dry?' · The plant is thirsty: '+now+' days since the last watering.':''}</p>`;
 return s}
-function wk(d){return Math.floor((Math.floor(Date.UTC(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10))/864e5)+3)/7)}
-function streak(){var s={};entries.forEach(function(e){s[wk(e.date)]=1});var c=wk(new Date().toISOString().slice(0,10)),n=0;if(!s[c])c--;while(s[c]){n++;c--}return n}
-function cut(s,n){s=s||'';return s.length>n?s.slice(0,n)+'…':s}
-function incentives(g,keys){
-var tot=entries.length,st=streak(),n=keys.length;
-var fresh=keys.filter(function(k){return days(g[k][0].date)<=14}).length;
-var home=entries.some(function(e){return e.type==='Home meeting'});
-var mon=new Date().toISOString().slice(0,7);
-var all3=TYPES.every(function(t){return entries.some(function(e){return e.type===t&&e.date.slice(0,7)===mon})});
-var B=[['First watering',tot>=1],['10 waterings',tot>=10],['4-week streak',st>=4],['Every branch watered in 14 days',n>=3&&fresh===n],['Home meeting hosted',home],['All three types this month',all3]];
-var L=[['Seed',0],['Sapling',5],['Young tree',15],['Flourishing tree',40]],lv=0;
-L.forEach(function(x,i){if(tot>=x[1])lv=i});
-var nx=L[lv+1],pct=nx?Math.round((tot-L[lv][1])/(nx[1]-L[lv][1])*100):100;
-return '<div class="card"><h2>Our garden</h2><p style="margin:0"><strong>'+L[lv][0]+'</strong> · '+tot+' watering'+(tot===1?'':'s')+' together</p><div class="bar" role="img" aria-label="'+pct+' percent to the next stage"><i style="width:'+pct+'%"></i></div><p class="mute" style="margin:0 0 12px">'+(nx?(nx[1]-tot)+' more to grow into a '+nx[0].toLowerCase()+'.':'Fully grown. Keep tending it.')+'</p><p><span class="tag">Faithful streak: '+st+' week'+(st===1?'':'s')+'</span><span class="tag">'+fresh+' of '+n+' branches watered in the last 14 days</span></p><div>'+B.map(function(b){return '<span class="bd'+(b[1]?' on':'')+'">'+b[0]+(b[1]?'':' (locked)')+'</span>'}).join('')+'</div></div>'}
-function overview(g,keys){
-var tm=teamSum(g,keys),h=incentives(g,keys);
-h+='<div class="card"><h2>Flock summary</h2>'+chart(entries)+(tm?'<div class="sum">'+esc(tm.text)+'</div><p class="mute" style="font-size:14px">Based on '+tm.n+' entries, '+esc(tm.at)+'</p>':'<p class="mute">No flock summary yet.</p>')+(sampleFn&&entries.length?'<button id="genT" type="button">'+(tm?'Refresh summary':'Generate flock summary')+'</button>':'')+'</div>';
-h+='<div class="card"><h2>All students at a glance</h2>'+(keys.length?'<div class="ov">'+keys.map(function(k){var l=g[k],c=l.find(function(e){return e.burden}),t=l.find(function(e){return e.content});return '<button type="button" class="sc" data-k="'+esc(k)+'">'+tree(l,true)+'<strong>'+esc(l[0].student)+'</strong><p>'+l.length+' watering'+(l.length>1?'s':'')+' · last '+days(l[0].date)+' days ago</p>'+(t?'<p><span class="mute">Latest:</span> '+esc(cut(t.content,110))+'</p>':'')+(c?'<p><span class="mute">Burden / prayer:</span> '+esc(cut(c.burden,110))+'</p>':'')+'</button>'}).join('')+'</div>':'<p class="mute">Nothing yet. Save the first watering.</p>')+'</div>';
-return h}
-function bindOv(){var t=$('genT');if(t)t.onclick=function(){genTeam(t)};document.querySelectorAll('.sc').forEach(function(b){b.onclick=function(){sel=b.dataset.k;tab='indiv';render()}})}
-function today(){return new Date().toISOString().slice(0,10)}
-function bl(l,f,n){var o=l.filter(function(e){return e[f]}).slice(0,n).map(function(e){return '\u2022 '+cut(e[f],140)+' ('+e.date+')'});return o.length?o.join('\n'):''}
-function localSum(l){var c=TYPES.map(function(t){return l.filter(function(e){return e.type===t}).length}),d=days(l[0].date);
-var s=l[0].student+' has been watered '+l.length+(l.length===1?' time':' times')+' since '+l[l.length-1].date+': '+c[0]+' one-on-one, '+c[1]+' home meeting, '+c[2]+' small group. The last watering was '+d+' day'+(d===1?'':'s')+' ago.';
-[['Recently covered','content'],['Materials','materials'],['Inspiration','insp'],['Carrying','burden']].forEach(function(x){var b=bl(l,x[1],3);if(b)s+='\n\n'+x[0]+':\n'+b});
-s+='\n\nNext watering: '+(d>21?'Reach out soon; it has been over three weeks.':d>14?'Plan a visit this week.':'On track. Keep the rhythm.');
-return{text:s,n:l.length,at:today()}}
-function teamSum(g,keys){if(!entries.length)return null;
-var due=keys.filter(function(k){return days(g[k][0].date)>14}).map(function(k){return g[k][0].student+' ('+days(g[k][0].date)+' days)'});
-var pr=entries.filter(function(e){return e.burden}).sort(function(a,b){return a.date<b.date?1:-1}).slice(0,5).map(function(e){return '\u2022 '+e.student+': '+cut(e.burden,120)}),st=streak();
-var s='The team has logged '+entries.length+' waterings across '+keys.length+' student'+(keys.length===1?'':'s')+'. Faithful streak: '+st+' week'+(st===1?'':'s')+'.';
-s+='\n\nWho needs a visit soon: '+(due.length?due.join(', '):'everyone has been watered in the last two weeks.');
-if(pr.length)s+='\n\nRecent prayer needs:\n'+pr.join('\n');
-return{text:s,n:entries.length,at:today()}}
-function render(){
-var g=groups(),keys=Object.keys(g);
-keys.sort(function(a,b){return days(g[b][0].date)-days(g[a][0].date)});
-$('names').innerHTML=keys.map(function(k){return '<option value="'+esc(g[k][0].student)+'">'}).join('');
-$('tab-g').setAttribute('aria-selected',tab==='garden');$('tab-i').setAttribute('aria-selected',tab!=='garden');
-var m=$('main');
-if(tab==='garden'){m.innerHTML=overview(g,keys);bindOv();return}
-if(!keys.length){m.innerHTML='<div class="card"><h2>Individual growth</h2><p class="mute">No students yet. Save the first watering.</p></div>';return}
-if(!sel||!g[sel])sel=keys[0];
-var chips='<div class="card"><h2>Individual growth</h2><div class="chips">'+keys.map(function(k){var q=g[k];return '<button type="button" class="stu" data-k="'+esc(k)+'" aria-pressed="'+(sel===k)+'"><span>'+esc(q[0].student)+'<br><small>last '+days(q[0].date)+'d ago</small></span></button>'}).join('')+'</div></div>';
-var l=g[sel],cnt=TYPES.map(function(t){return l.filter(function(e){return e.type===t}).length}),sm=localSum(l);
-m.innerHTML=chips+'<div class="card"><h2>'+esc(l[0].student)+'</h2><p class="mute" style="margin:0 0 8px">'+l.length+(l.length===1?' watering':' waterings')+' · last watered '+days(l[0].date)+' days ago</p><p>'+TYPES.map(function(t,i){return '<span class="tag">'+t+': '+cnt[i]+'</span>'}).join('')+'</p>'+tree(l,false)+chart(l)+
-'<h2 style="margin-top:20px">Summary</h2>'+(sm?'<div class="sum">'+esc(sm.text)+'</div><p class="mute" style="font-size:14px">Based on '+sm.n+' entries, '+esc(sm.at)+'</p>':'<p class="mute">No summary yet.</p>')+
-(sampleFn?'<button id="gen" type="button">'+(sm?'Refresh summary':'Generate summary')+'</button>':'<p class="mute"></p>')+'</div>'+
-'<div class="card"><h2>Timeline</h2>'+l.map(function(e){return '<div class="ent"><button type="button" class="alt" data-del="'+e.id+'" style="min-height:32px;padding:0 12px;font-size:14px;float:right">Delete</button><strong>'+esc(e.date)+'</strong> <span class="tag">'+esc(e.type)+'</span>'+(e.content?'<p>'+esc(e.content)+'</p>':'')+(e.materials?'<p><span class="mute">Materials:</span> '+esc(e.materials)+'</p>':'')+(e.insp?'<p><span class="mute">Inspiration:</span> '+esc(e.insp)+'</p>':'')+(e.burden?'<p><span class="mute">Burden / prayer:</span> '+esc(e.burden)+'</p>':'')+'</div>'}).join('')+'</div>';
-var b=$('gen');if(b)b.onclick=function(){gen(sel,b)};document.querySelectorAll('.chips .stu').forEach(function(c){c.onclick=function(){sel=c.dataset.k;render()}})}
 
-var CFG=null,sha=null;
+const OPEN=new Set(['g-our','i-plant','s-stats']);
+const sec=(id,t,hint,body)=>`<details class="card" data-id="${id}"${OPEN.has(id)?' open':''}><summary><span>${t}</span>${hint?`<small>${hint}</small>`:''}</summary><div>${body}</div></details>`;
+document.addEventListener('toggle',ev=>{const d=ev.target;if(d.dataset&&d.dataset.id){if(d.open)OPEN.add(d.dataset.id);else OPEN.delete(d.dataset.id)}},true);
+function incentives(g,keys){const tot=entries.length,st=streak(),n=keys.length,fresh=keys.filter(k=>days(g[k][0].date)<=14).length,mon=today().slice(0,7);
+const B=[['First drop',tot>=1],['10 drops',tot>=10],['4-week streak',st>=4],['Every plant watered in 14 days',n>=3&&fresh===n],['Both types this month',TYPES.every(t=>entries.some(e=>e.type===t&&e.date.slice(0,7)===mon))]];
+const L=[['Seed',0],['Sprout',5],['Growing plant',15],['Flourishing plant',40]];let lv=0;L.forEach((x,i)=>{if(tot>=x[1])lv=i});const nx=L[lv+1],pct=nx?Math.round((tot-L[lv][1])/(nx[1]-L[lv][1])*100):100;
+return sec('g-our','Our garden',L[lv][0]+' · '+pl(tot,'drop'),`<p style="margin:0"><strong>${L[lv][0]}</strong> · ${pl(tot,'drop')} of water together</p><div class="bar" role="img" aria-label="${pct} percent to the next stage"><i style="width:${pct}%"></i></div><p class="mute" style="margin:0 0 12px">${nx?(nx[1]-tot)+' more drops until a '+nx[0].toLowerCase()+'.':'Flourishing. Keep watering.'} One visit is one drop.</p><p><span class="tag">Faithful streak: ${pl(st,'week')}</span><span class="tag">${fresh} of ${n} plants watered in the last 14 days</span></p><div>${B.map(b=>`<span class="bd${b[1]?' on':''}">${b[0]}${b[1]?'':' (locked)'}</span>`).join('')}</div>`)}
+
+const bl=(l,f,n)=>l.filter(e=>e[f]).slice(0,n).map(e=>'• '+cut(e[f],140)+' ('+e.date+')').join('\n');
+function localSum(l){const c=TYPES.map(x=>l.filter(e=>e.type===x).length),d=days(l[0].date);
+let s=`${l[0].student} has received ${pl(l.length,'drop')} of water since ${l[l.length-1].date}: ${TYPES.map((x,i)=>c[i]+' '+x.toLowerCase()).join(', ')}. The last watering was ${pl(d,'day')} ago.`;
+[['Recently covered','content'],['Materials','materials'],['Student overflow','insp'],['Pray for','burden']].forEach(x=>{const b=bl(l,x[1],3);if(b)s+='\n\n'+x[0]+':\n'+b});
+s+='\n\nNext watering: '+(d>21?'Reach out soon; it has been over three weeks.':d>14?'Plan a visit this week.':'On track. Keep the rhythm.');return{text:s,n:l.length}}
+function teamSum(g,keys){if(!entries.length)return null;const due=keys.filter(k=>days(g[k][0].date)>14).map(k=>g[k][0].student+' ('+days(g[k][0].date)+' days)'),st=streak();
+const pr=entries.filter(e=>e.burden).sort((a,b)=>a.date<b.date?1:-1).slice(0,5).map(e=>'• '+e.student+': '+cut(e.burden,120));
+let s=`The team has given ${pl(entries.length,'drop')} of water across ${pl(keys.length,'student')}. Faithful streak: ${pl(st,'week')}.\n\nWho needs a visit soon: ${due.length?due.join(', '):'everyone has been watered in the last two weeks.'}`;
+if(pr.length)s+='\n\nPray for:\n'+pr.join('\n');return{text:s,n:entries.length}}
+function weekSum(i){const l=entries.filter(e=>wk(e.date)===i);if(!l.length)return null;const sg=grp(bk,l),sd=new Set(l.map(e=>e.key)),pr=l.filter(e=>e.burden).slice(0,5).map(e=>'• '+e.student+': '+cut(e.burden,120));
+let s=`This week ${pl(l.length,'drop')} of water reached ${pl(sd.size,'student')}, given by ${Object.values(sg).map(a=>(a[0].by||'Not recorded')+' ('+a.length+')').join(', ')}.`;if(pr.length)s+='\n\nPray for:\n'+pr.join('\n');return{text:s,n:l.length}}
+const sumBox=(id,label,kind)=>{const g=grp(e=>e.key),sm=kind==='s'?(g[sel]?localSum(g[sel]):null):kind==='t'?teamSum(g,Object.keys(g)):weekSum(+id.slice(1));return `${label?`<p style="margin:16px 0 4px"><strong>${label}</strong></p>`:''}${sm?`<div class="sum">${esc(sm.text)}</div><p class="mute" style="font-size:14px">Written automatically from ${pl(sm.n,'entry')}.</p>`:'<p class="mute">No summary yet.</p>'}`};
+const entHtml=e=>`<div class="ent"><strong>${esc(e.date)}</strong> <span class="tag">${esc(e.type)}</span> <span class="mute">watered by ${esc(by(e))}</span>${e.content?`<p>${esc(e.content)}</p>`:''}${e.materials?`<p><span class="mute">Materials:</span> ${esc(e.materials)}</p>`:''}${e.insp?`<p><span class="mute">Student overflow:</span> ${esc(e.insp)}</p>`:''}${e.burden?`<p><span class="mute">Pray for:</span> ${esc(e.burden)}</p>`:''}</div>`;
+const countRows=g=>Object.values(g).sort((a,b)=>b.length-a.length).map(l=>`<div class="row"><span>${esc(l[0].student||l[0].by||'Not recorded')}</span><strong>${pl(l.length,'drop')}</strong></div>`).join('')||'<p class="mute">Nothing yet.</p>';
+const mk=(k,l)=>`<button type="button" class="stu" ${k}>`;
+
+function archive(){const ys=[...new Set(['2026','2027',...entries.map(e=>e.date.slice(0,4))])].sort();if(!ys.includes(yr))yr=ys[0];
+const l=entries.filter(e=>e.date.slice(0,4)===yr),ms=yearM(yr);
+return sec('g-year','Yearly archive',yr+' · '+pl(l.length,'drop'),`<div class="tabs" style="margin-top:0">${ys.map(y=>`<button type="button" data-y="${y}" aria-selected="${yr===y}">${y}</button>`).join('')}</div><p><strong>${pl(l.length,'drop')}</strong> of water in ${yr} · ${pl(Object.keys(grp(e=>e.key,l)).length,'plant')} · ${pl(Object.keys(grp(bk,l)).length,'serving one')}</p>${chartM(l,ms)}<p style="margin:16px 0 4px"><strong>By serving one</strong></p>${countRows(grp(bk,l))}<p style="margin:16px 0 4px"><strong>By student</strong></p>${countRows(grp(e=>e.key,l))}`)
++sec('g-month','Monthly archive',yr,ms.map(x=>{const q=l.filter(e=>e.date.slice(0,7)===x[0]).sort((a,b)=>a.date<b.date?1:-1);return q.length?`<details><summary>${x[1]} ${yr} · ${pl(q.length,'drop')}</summary>${q.map(e=>entHtml(e)+`<p class="mute" style="margin:0">Student: ${esc(e.student)}</p>`).join('')}</details>`:''}).join('')||'<p class="mute">No waterings in '+yr+'.</p>')}
+function wkBody(g,keys){const i=wk(today())+wkOff,l=entries.filter(e=>wk(e.date)===i).sort((a,b)=>a.date<b.date?1:-1),sd=new Set(l.map(e=>e.key)),idle=keys.filter(k=>!sd.has(k)).map(k=>g[k][0].student),sg=grp(bk,l);
+return `<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button type="button" class="alt" data-o="-1">← Earlier</button><button type="button" class="alt" data-o="0">This week</button><button type="button" class="alt" data-o="1" ${wkOff>=0?'disabled':''}>Later →</button></div><p style="margin:16px 0 4px"><strong>Week of ${wkD(i,0)} to ${wkD(i,6)}</strong></p><p>${pl(l.length,'drop')} of water · ${pl(sd.size,'plant')} watered · ${pl(Object.keys(sg).length,'serving one')}</p>${Object.values(sg).sort((a,b)=>b.length-a.length).map(a=>`<div class="row"><span>${esc(a[0].by||'Not recorded')}</span><strong>${pl(a.length,'drop')}${MS.filter(x=>a.length>=x[0]).length?' · reached '+MS.filter(x=>a.length>=x[0]).pop()[0]:''}</strong></div>`).join('')||'<p class="mute">No waterings this week.</p>'}<p><strong>Not yet watered this week:</strong> ${idle.length?idle.map(esc).join(', '):'every plant has been watered.'}</p>${l.length?sumBox('w'+i,'','w'):''}<details><summary>Waterings this week (${l.length})</summary>${l.map(e=>entHtml(e)+`<p class="mute" style="margin:0">Student: ${esc(e.student)}</p>`).join('')||'<p class="mute">Nothing yet.</p>'}</details>`}
+function overview(g,keys){return incentives(g,keys)
++sec('g-all','All plants at a glance',pl(keys.length,'plant'),keys.length?`<div class="ov">${keys.map(k=>{const l=g[k],c=l.find(e=>e.burden),t=l.find(e=>e.content);return `<button type="button" class="sc" data-k="${esc(k)}">${plant(l,true)}<strong>${esc(l[0].student)}</strong><p>${pl(l.length,'drop')} · last ${days(l[0].date)} days ago</p>${t?`<p><span class="mute">Latest:</span> ${esc(cut(t.content,110))}</p>`:''}${c?`<p><span class="mute">Pray for:</span> ${esc(cut(c.burden,110))}</p>`:''}</button>`}).join('')}</div>`:'<p class="mute">Nothing yet. Add the first watering on page 1.</p>')
++sec('g-sum','Garden summary',pl(entries.length,'drop')+' in all',chartM(entries,last6())+(entries.length?sumBox('team','','t'):''))
++sec('g-week','Weekly summary',pl(entries.filter(e=>wk(e.date)===wk(today())).length,'drop')+' this week',wkBody(g,keys))
++archive()}
+
+function render(){
+$('p1').hidden=page!==1;$('p2').hidden=page!==2;$('pg1').setAttribute('aria-selected',page===1);$('pg2').setAttribute('aria-selected',page===2);
+const g=grp(e=>e.key),keys=Object.keys(g).sort((a,b)=>days(g[b][0].date)-days(g[a][0].date)),gb=grp(bk),bkeys=Object.keys(gb);
+$('names').innerHTML=keys.map(k=>`<option value="${esc(g[k][0].student)}">`).join('');
+$('bys').innerHTML=bkeys.filter(k=>k!=='not recorded').map(k=>`<option value="${esc(gb[k][0].by)}">`).join('');
+$('recent').innerHTML=entries.slice().sort((a,b)=>(b.created||0)-(a.created||0)).slice(0,showAll?1000:10).map(e=>{const id=esc(String(e.id));return `<div class="row" style="align-items:center;flex-wrap:wrap"><span><strong>${esc(e.date)}</strong> <span class="tag">${esc(e.type)}</span> ${esc(e.student)} <span class="mute">· ${esc(by(e))}</span></span><span style="display:flex;gap:8px"><button type="button" class="alt" style="min-height:36px;padding:0 14px;font-size:14px" data-edit="${id}">${editId===String(e.id)?'Editing':'Edit'}</button><button type="button" class="alt" style="min-height:36px;padding:0 14px;font-size:14px" data-del="${id}">${armed===String(e.id)?'Tap again to delete':'Delete'}</button></span></div>`}).join('')||'<p class="mute">Nothing yet.</p>';
+$('recent').innerHTML+=entries.length>10?`<p style="margin:12px 0 0"><button type="button" class="alt" data-all="1">${showAll?'Show latest 10':'Show all '+entries.length}</button></p>`:'';
+if(page!==2)return;
+$('sub').innerHTML=[['garden','Garden summary'],['indiv','Individual growth'],['serve','Serving ones']].map(t=>`<button type="button" role="tab" data-t="${t[0]}" aria-selected="${tab===t[0]}">${t[1]}</button>`).join('');
+const m=$('main'),wi=wk(today());
+if(tab==='garden'){m.innerHTML=overview(g,keys);return}
+if(tab==='indiv'){if(!keys.length){m.innerHTML='<div class="card"><p class="mute">No students yet.</p></div>';return}
+if(!sel||!g[sel])sel=keys[0];const l=g[sel],cnt=TYPES.map(t=>l.filter(e=>e.type===t).length);
+m.innerHTML=`<div class="card"><h2>Individual growth</h2><div class="chips">${keys.map(k=>`<button type="button" class="stu" data-k="${esc(k)}" aria-pressed="${sel===k}"><span>${esc(g[k][0].student)}<br><small>last ${days(g[k][0].date)}d ago</small></span></button>`).join('')}</div></div>`
++sec('i-plant',esc(l[0].student),pl(l.length,'drop')+' · last watered '+days(l[0].date)+' days ago',`<p>${TYPES.map((t,i)=>`<span class="tag">${t}: ${cnt[i]}</span>`).join('')}</p>${plant(l,false)}${chartM(l,last6())}`)
++sec('i-sum','Summary','',sumBox(sid(sel),'','s'))
++sec('i-time','Timeline',pl(l.length,'entry'),l.map(entHtml).join(''));return}
+if(tab==='serve'){if(!bkeys.length){m.innerHTML='<div class="card"><h2>Serving ones</h2><p class="mute">No entries yet.</p></div>';return}
+bkeys.sort((a,b)=>wc(b,wi)-wc(a,wi)||gb[b].length-gb[a].length);if(!who||!gb[who])who=bkeys[0];
+const l=gb[who],c=wc(who,wi),ss=grp(e=>e.key,l),cnt=TYPES.map(t=>l.filter(e=>e.type===t).length);
+m.innerHTML=`<div class="card"><h2>Serving one</h2><select id="whoSel" aria-label="Serving one">${bkeys.map(k=>`<option value="${esc(k)}"${who===k?' selected':''}>${esc(gb[k][0].by||'Not recorded')} (this week ${wc(k,wi)})</option>`).join('')}</select></div>`
++sec('s-stats',esc(l[0].by||'Not recorded'),pl(l.length,'drop')+' · '+c+' this week',`<div>${MS.map(x=>`<span class="bd${c>=x[0]?' on':''}">${x[0]} this week${c>=x[0]?'':' (locked)'}</span>`).join('')}</div><p>${TYPES.map((t,i)=>`<span class="tag">${t}: ${cnt[i]}</span>`).join('')}</p>${chartM(l,last6())}`)
++sec('s-stu','Students watered',pl(Object.keys(ss).length,'student'),countRows(ss))
++sec('s-time','Timeline',pl(l.length,'entry'),l.map(e=>entHtml(e)+`<p class="mute" style="margin:0">Student: ${esc(e.student)}</p>`).join(''))}
+}
+
+async function del(id){try{await mutate(d=>{d.entries=d.entries.filter(e=>String(e.id)!==id)},'Delete watering')}catch(e){$('status').textContent='Could not delete: '+e.message;return}armed=null;if(editId===id)resetForm();$('status').textContent='That record was deleted.';render()}
+document.addEventListener('change',ev=>{if(ev.target.id==='whoSel'){who=ev.target.value;render()}});
+document.addEventListener('click',ev=>{const t=ev.target.closest('[data-t],[data-k],[data-w],[data-y],[data-o],[data-del],[data-edit],[data-all]');if(!t)return;const d=t.dataset;
+if(d.t)tab=d.t;else if(d.k){sel=d.k;tab='indiv'}else if(d.w)who=d.w;else if(d.y)yr=d.y;else if(d.o!==undefined)wkOff=d.o==='0'?0:Math.min(0,wkOff+Number(d.o));else if(d.edit){startEdit(d.edit);return}else if(d.all){showAll=!showAll}else if(d.del){if(armed===d.del){del(d.del);return}armed=d.del;setTimeout(()=>{if(armed===d.del){armed=null;render()}},4000)}
+render()});
+$('pg1').onclick=()=>{page=1;render()};$('pg2').onclick=()=>{page=2;render()};
+const pop=t=>{$('popt').textContent=t;$('pop').hidden=false;$('popx').focus()};$('popx').onclick=()=>{$('pop').hidden=true};
+function resetForm(){editId=null;['by','name','content','materials','insp','burden'].forEach(i=>{$(i).value=''});[...$('type').options].forEach(o=>{if(!TYPES.includes(o.value))o.remove()});$('type').value=TYPES[0];$('date').value=today();$('save').textContent='I watered';$('cancel').hidden=true;$('fh').textContent='I watered'}
+function startEdit(id){const e=entries.find(x=>String(x.id)===id);if(!e)return;editId=id;
+if(![...$('type').options].some(o=>o.value===e.type)){const o=document.createElement('option');o.textContent=e.type;$('type').appendChild(o)}
+$('by').value=e.by||'';$('name').value=e.student||'';$('type').value=e.type;$('date').value=e.date;$('content').value=e.content||'';$('materials').value=e.materials||'';$('insp').value=e.insp||'';$('burden').value=e.burden||'';
+$('save').textContent='Save changes';$('cancel').hidden=false;$('fh').textContent='Edit this record';$('status').textContent='Change what you need, then press Save changes.';$('f').scrollIntoView({behavior:'smooth'});render()}
+$('cancel').onclick=()=>{resetForm();$('status').textContent='';render()};
+$('f').onsubmit=async ev=>{ev.preventDefault();const bn=$('by').value.trim(),n=$('name').value.trim();if(!n||!bn)return;
+const o={by:bn,byKey:keyOf(bn),student:n,key:keyOf(n),type:$('type').value,date:$('date').value,content:$('content').value.trim(),materials:$('materials').value.trim(),insp:$('insp').value.trim(),burden:$('burden').value.trim(),created:Date.now()};
+if(editId){const id=editId;delete o.created;$('save').disabled=true;try{await mutate(d=>{const x=d.entries.find(y=>String(y.id)===id);if(x)Object.assign(x,o)},'Edit watering')}catch(e){$('status').textContent='Could not save the changes: '+e.message;$('save').disabled=false;return}$('save').disabled=false;resetForm();$('status').textContent='The record was updated.';render();return}
+const c=wc(o.byKey,wk(o.date))+1;$('save').disabled=true;
+o.id=Date.now()*1000+Math.floor(Math.random()*1000);try{await mutate(d=>{d.entries.push(o)},'Add watering')}catch(e){$('status').textContent='Could not save: '+e.message;$('save').disabled=false;return}
+['name','content','materials','insp','burden'].forEach(i=>{$(i).value=''});$('save').disabled=false;
+$('status').textContent=`One drop of water added to ${n}’s plant. This week ${bn} has watered ${pl(c,'time')}. Thank you for showing up.`;
+const ms=MS.find(x=>x[0]===c);if(ms)pop(ms[1]);render()};
+let CFG=null,sha=null,TEAM=null,last='';
 try{CFG=JSON.parse(localStorage.getItem('shCfg')||'null')}catch(e){}
-function API(){return 'https://api.github.com/repos/'+CFG.repo+'/contents/entries.json'}
-function hdr(){return{'Authorization':'Bearer '+CFG.token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}}
-function dec(b){var bin=atob(b.replace(/\n/g,'')),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u)}
-function enc(s){var u=new TextEncoder().encode(s),b='';for(var i=0;i<u.length;i++)b+=String.fromCharCode(u[i]);return btoa(b)}
-async function pull(){var r=await fetch(API()+'?t='+Date.now(),{headers:hdr(),cache:'no-store'});
+const API=()=>'https://api.github.com/repos/'+CFG.repo+'/contents/entries.json',hdr=()=>({'Authorization':'Bearer '+CFG.token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'});
+const dec=b=>{const bin=atob(b.replace(/\n/g,'')),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u)};
+const enc=s=>{const u=new TextEncoder().encode(s);let b='';for(let i=0;i<u.length;i++)b+=String.fromCharCode(u[i]);return btoa(b)};
+async function pull(){const r=await fetch(API()+'?t='+Date.now(),{headers:hdr(),cache:'no-store'});
 if(r.status===404){sha=null;return{entries:[]}}
 if(r.status===401||r.status===403){$('login').hidden=false;throw new Error('auth')}
 if(!r.ok)throw new Error('GitHub error '+r.status);
-var j=await r.json();sha=j.sha;var d=JSON.parse(dec(j.content)||'{}');d.entries=d.entries||[];return d}
-async function push(d,msg){var r=await fetch(API(),{method:'PUT',headers:Object.assign({'Content-Type':'application/json'},hdr()),body:JSON.stringify({message:msg,content:enc(JSON.stringify(d,null,1)),sha:sha||undefined})});
+const j=await r.json();sha=j.sha;const d=JSON.parse(dec(j.content)||'{}');d.entries=d.entries||[];return d}
+async function push(d,msg){const r=await fetch(API(),{method:'PUT',headers:Object.assign({'Content-Type':'application/json'},hdr()),body:JSON.stringify({message:msg,content:enc(JSON.stringify(d,null,1)),sha:sha||undefined})});
 if(r.status===409||r.status===422)return false;if(!r.ok)throw new Error('GitHub error '+r.status);sha=(await r.json()).content.sha;return true}
-async function mutate(fn,msg){for(var i=0;i<3;i++){var d=await pull();fn(d);if(await push(d,msg)){entries=d.entries;render();return}}throw new Error('Someone else saved at the same moment. Please try again.')}
-function load(){return pull().then(function(d){entries=d.entries;render()})}
-$('tab-g').onclick=function(){tab='garden';render()};
-$('tab-i').onclick=function(){tab='indiv';render()};
-$('main').addEventListener('click',function(ev){var d=ev.target.closest('[data-del]');if(d&&confirm('Delete this watering?')){var id=d.dataset.del;mutate(function(x){x.entries=x.entries.filter(function(e){return String(e.id)!==id})},'Delete watering').catch(function(e){$('status').textContent=e.message})}});
-$('f').onsubmit=async function(ev){ev.preventDefault();var n=$('name').value.trim();if(!n||!CFG)return;
-var o={id:Date.now()*1000+Math.floor(Math.random()*1000),student:n.slice(0,200),key:keyOf(n),type:$('type').value,date:$('date').value,content:$('content').value.trim(),materials:$('materials').value.trim(),insp:$('insp').value.trim(),burden:$('burden').value.trim(),created:new Date().toISOString()};
-$('save').disabled=true;
-try{await mutate(function(d){d.entries.push(o)},'Add watering')}catch(e){$('status').textContent='Could not save: '+e.message;$('save').disabled=false;return}
-['content','materials','insp','burden'].forEach(function(i){$(i).value=''});sel=keyOf(n);tab='indiv';$('save').disabled=false;$('status').textContent='Watered. '+n+'\u2019s branch is watered. Thank you for showing up.';render()};
-var TEAM=null;
-function b64(u){var s='';for(var i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s)}
-function ub(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
-async function dk(pw,salt){var m=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:600000,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
-async function unlock(pw,b){var k=await dk(pw,ub(b.s)),p=await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(b.i)},k,ub(b.c));return JSON.parse(new TextDecoder().decode(p))}
-function mode(){$('rp').hidden=!!TEAM;$('pwl').textContent=TEAM?'Team password':'Access token';$('alt').innerHTML=TEAM?'<a href="#" id="alt1">Use an access token instead</a>':'';var a=$('alt1');if(a)a.onclick=function(e){e.preventDefault();TEAM=null;mode()}}
-$('lf').onsubmit=async function(ev){ev.preventDefault();$('lerr').textContent='';
+async function mutate(fn,msg){for(let i=0;i<3;i++){const d=await pull();fn(d);if(await push(d,msg)){entries=d.entries;last=JSON.stringify(entries);render();return}}throw new Error('Someone else saved at the same moment. Please try again.')}
+const load=()=>pull().then(d=>{const s=JSON.stringify(d.entries);if(s!==last){last=s;entries=d.entries;render()}});
+const ub=s=>{const b=atob(s),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u};
+async function unlock(pw,b){const m=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']),k=await crypto.subtle.deriveKey({name:'PBKDF2',salt:ub(b.s),iterations:600000,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['decrypt']),p=await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(b.i)},k,ub(b.c));return JSON.parse(new TextDecoder().decode(p))}
+function mode(){$('rp').hidden=!!TEAM;$('pwl').textContent=TEAM?'Team password':'Access token';$('alt').innerHTML=TEAM?'<a href="#" id="alt1">Use an access token instead</a>':'';const a=$('alt1');if(a)a.onclick=e=>{e.preventDefault();TEAM=null;mode()}}
+$('lf').onsubmit=async ev=>{ev.preventDefault();$('lerr').textContent='';
 try{if(TEAM){try{CFG=await unlock($('pw').value,TEAM)}catch(e){throw new Error('Wrong password.')}}else CFG={repo:$('repo').value.trim(),token:$('pw').value.trim()};
 if(!CFG.repo||!CFG.token)throw new Error('Enter the repository name and token.');
-var r=await fetch('https://api.github.com/repos/'+CFG.repo,{headers:hdr()});if(!r.ok)throw new Error('Could not reach that repository. Check the name and the token.');
+const r=await fetch('https://api.github.com/repos/'+CFG.repo,{headers:hdr()});if(!r.ok)throw new Error('Could not reach that repository. Check the name and the token.');
 await load();localStorage.setItem('shCfg',JSON.stringify(CFG));$('pw').value='';$('pw').type='password';$('sp').checked=false;$('login').hidden=true}catch(e){CFG=null;$('lerr').textContent=e.message==='auth'?'That token was not accepted.':e.message}};
 $('sp').onchange=function(){$('pw').type=this.checked?'text':'password'};
-$('out').onclick=function(ev){ev.preventDefault();try{localStorage.removeItem('shCfg')}catch(e){}CFG=null;entries=[];render();$('login').hidden=false};
-$('bk').onclick=function(ev){ev.preventDefault();var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({entries:entries},null,1)],{type:'application/json'}));a.download='shepherding-backup-'+today()+'.json';a.click()};
-if(!CFG)fetch('team.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){if(j&&j.c){TEAM=j;mode()}}).catch(function(){});
+$('out').onclick=ev=>{ev.preventDefault();try{localStorage.removeItem('shCfg')}catch(e){}CFG=null;entries=[];last='';render();$('login').hidden=false};
+$('bk').onclick=ev=>{ev.preventDefault();const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({entries},null,1)],{type:'application/json'}));a.download='shepherding-backup-'+today()+'.json';a.click()};
+if(!CFG)fetch('team.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.c){TEAM=j;mode()}}).catch(()=>{});
 render();
-if(CFG)load().catch(function(){});else $('login').hidden=false;
-setInterval(function(){if(CFG&&$('login').hidden)load().catch(function(){})},30000);
+if(CFG)load().catch(()=>{});else $('login').hidden=false;
+setInterval(()=>{if(CFG&&$('login').hidden)load().catch(()=>{})},30000);
 </script>
 </body>
 </html>
